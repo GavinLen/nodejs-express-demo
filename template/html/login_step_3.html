@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>Login-Step3</title>
+    <link rel="stylesheet" href="../static/plugins/bootstrap/bootstrap.min.css">
+    <link rel="stylesheet" href="../static/plugins/Font-Awesome-3.2.1/css/font-awesome.min.css">
+    <style>
+        body {
+            background: #f1f4f5;
+        }
+
+        .logo {
+            height: 195px;
+            background: url("../static/images/eagle-logo.png") center no-repeat;
+        }
+
+        .register-container {
+            width: 998px;
+            margin: 0 auto;
+            border: 1px solid #d3dada;
+            border-radius: 10px;
+            padding: 60px;
+            box-sizing: border-box;
+            background: white;
+        }
+
+        .step-p {
+            display: inline-block;
+            line-height: 24px;
+        }
+
+        .step-p span {
+            font-weight: bold;
+            font-size: 20px;
+        }
+
+        .title {
+            color: #4787b8;
+            font-size: 18px;
+        }
+
+        .text-center button {
+            margin-top: 15px;
+        }
+    </style>
+</head>
+<body>
+<div class="logo"></div>
+<div class="register-container">
+    <div class="container-fluid">
+        <ul class="nav nav-pills">
+            <li role="presentation">
+                <a href=""><i class="icon-ok"><span> Completed<br>Set up a personal account</span></i></a>
+            </li>
+            <li role="presentation">
+                <a href=""><i class="icon-user"><span> Step 2<br>Update User information</span></i></a>
+            </li>
+            <li role="presentation" class="active">
+                <a href=""><i class="icon-cogs"><span> Step 3<br>Choose user roles</span></i></a>
+            </li>
+        </ul>
+
+    </div>
+    <div class="">
+        <div>
+            <div>Data Customer</div>
+            <div>Data Owner</div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <button type="button" class="btn btn-default btn-block">Skip</button>
+                <span></span>
+            </div>
+            <div class="col-md-6">
+                <button type="button" class="btn btn-default btn-block btn-success">Update</button>
+                <span></span>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,89 @@
+extends ../layout
+block title
+    title Page
+block content
+    table.table.table-striped
+        thead
+            tr
+                th No.
+                th Name
+                th Code
+        tbody#table
+            - var arr = list;
+            - for(var i = 0; i < arr.length; i++) {
+            tr
+                td #{arr[i].id}
+                td #{arr[i].countryName}
+                td #{arr[i].countryCode}
+            - }
+    div.text-right
+        nav(aria-label='Page navigation', data-pages=pages)
+            ul.pagination(data-pageNum=pageNum)
+                li#previous_li
+                    a#previous(href='#', aria-label='Previous')
+                        span(aria-hidden='true') «
+                li
+                    a 1
+                li
+                    a 2
+                li
+                    a 3
+                li
+                    a 4
+                li
+                    a 5
+                li#next_
+                    a#next(href='#', aria-label='Next')
+                        span(aria-hidden='true') »
+block script
+    script.
+        $(function () {
+            // 前一页
+            $('#previous').click(function () {
+                var pageSize = 5;
+                var pages = parseInt($('.text-right nav').attr('data-pages'))
+                var pageNum = parseInt($('.pagination').attr('data-pageNum'));
+                if (pageNum > 1) {
+                    $('#previous').addClass('disabled');
+                    $('#table').html('');// 清除当前 tbody
+                    clickPage(pageNum - 1, pageSize)
+                }
+            });
+
+            // 后一页
+            $('#next').click(function () {
+                var pageSize = 5;
+                var pages = parseInt($('.text-right nav').attr('data-pages'))
+                var pageNum = parseInt($('.pagination').attr('data-pageNum'));
+                if (pages != pageNum) {
+                    $('#next').addClass('disabled');
+                    $('#table').html('');// 清除当前 tbody
+                    clickPage(pageNum + 1, pageSize);
+                }
+            });
+        });
+
+        /**
+         * 点击分页
+         * @param pageNum
+         * @param pageSize
+         */
+        function clickPage(pageNum, pageSize) {
+            $.ajax({
+                url: "/page?pageNum=" + pageNum + '&pageSize=' + pageSize,
+                type: "GET",
+                dataType: "json",
+                data: '',
+                success: function (data) {
+                    $('#table tr:gt(0)').remove();//删除之前的数据
+                    var dataArr = data.list;
+                    var htmlStr = '';
+                    for (var i = 0; i < dataArr.length; i++) {
+                        var item = dataArr[i];
+                        htmlStr += '<tr>' + '<td>' + item.id + '</td>' + '<td>' + item.countryName + '</td>' + '<td>' + item.countryCode + '</td>' + '</tr>';
+                    }
+                    $('#table').html(htmlStr);
+                    $('.pagination').attr('data-pageNum', pageNum);
+                }
+            });
+        }
